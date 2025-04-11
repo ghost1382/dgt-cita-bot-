@@ -9,8 +9,8 @@ COPY . .
 # Install the required Python packages
 RUN pip install --no-cache-dir -r requirements.txt
 
-# EXPOSE port 80 for the bot or web server
-EXPOSE 80  # or 5000, depending on your configuration
+# Expose port 80 for the bot (or port 5000 depending on your setup)
+EXPOSE 80
 
 # Run the bot
 CMD ["python", "main.py"]
