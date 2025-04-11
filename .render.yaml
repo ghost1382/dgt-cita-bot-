@@ -3,6 +3,6 @@ services:
     name: cita-bot
     env: docker
     plan: free
-    repo: https://github.com/YOUR_USERNAME/cita-bot
+    repo: https://github.com/ghost1382/dgt-cita-bot-
     branch: main
     autoDeploy: true
