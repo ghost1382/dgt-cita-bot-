@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: cita-bot
-    env: docker
-    plan: free
-    repo: https://github.com/ghost1382/dgt-cita-bot-
-    branch: main
-    autoDeploy: true
