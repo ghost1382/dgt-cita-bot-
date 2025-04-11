@@ -1,6 +1,8 @@
 from telegram import Bot
 from telegram.ext import Updater, CommandHandler
 import checker
+import threading
+import requests  # For sending Telegram messages
 
 # Replace with your Telegram Bot token and chat ID
 TOKEN = "7282237386:AAHFresU1mMc7kMlakjFjG-SkkxW7alV-Yk"
@@ -30,7 +32,16 @@ def stop(update, context):
     update.message.reply_text("Bot stopped.")
     exit()
 
+# Function to start periodic checks
+def start_periodic_check():
+    check_thread = threading.Thread(target=checker.periodic_check)
+    check_thread.daemon = True
+    check_thread.start()
+
 def main():
+    # Start the periodic check in a separate thread
+    start_periodic_check()
+
     # Create the Updater and pass it your bot's token.
     updater = Updater(TOKEN, use_context=True)
     
