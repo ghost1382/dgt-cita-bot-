@@ -1,11 +1,9 @@
 from telegram import Bot
 from telegram.ext import Updater, CommandHandler
-import logging
 import checker
 import threading
 import requests  # For sending Telegram messages
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+
 # Replace with your Telegram Bot token and chat ID
 TOKEN = "7282237386:AAHFresU1mMc7kMlakjFjG-SkkxW7alV-Yk"
 CHAT_ID = "7668015737"  # Your chat ID for receiving messages
