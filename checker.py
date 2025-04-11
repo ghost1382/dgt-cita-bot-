@@ -3,6 +3,8 @@ from playwright.sync_api import sync_playwright
 
 # Function to check if there's a cita
 def check_cita():
+    print("Checking cita...")  # Debugging line to confirm function is being called
+    
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)  # Headless mode means no UI
         page = browser.new_page()
@@ -10,7 +12,7 @@ def check_cita():
 
         # Check for captcha
         if page.query_selector('iframe[src*="recaptcha"]'):
-            print("Captcha detected!")
+            print("Captcha detected!")  # Debugging line to confirm captcha detection
             return "Captcha detected"
         
         # Continue with the normal process (Selecting province, country, etc)
@@ -18,10 +20,10 @@ def check_cita():
         # For now, we'll just simulate checking and return a mock response
         
         if "No hay citas" in page.content():
-            print("No citas available")
+            print("No citas available")  # Debugging line for availability check
             return "No citas available"
         else:
-            print("Citas available")
+            print("Citas available")  # Debugging line for availability check
             return "Citas available"
 
         browser.close()
