@@ -32,6 +32,17 @@ async def stop(update: Update, context: CallbackContext) -> None:
     await update.message.reply_text("Bot stopped.")
     exit()
 
+# Command to display help text
+async def help_command(update: Update, context: CallbackContext) -> None:
+    help_text = (
+        "Available commands:\n\n"
+        "/start - Start the bot and begin checking for citas.\n"
+        "/check - Manually trigger a cita check.\n"
+        "/stop - Stop the bot.\n"
+        "/help - Show this help message."
+    )
+    await update.message.reply_text(help_text)
+
 # Function to start periodic checks
 def start_periodic_check():
     check_thread = threading.Thread(target=checker.periodic_check)
@@ -49,6 +60,7 @@ def main():
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("check", check))
     application.add_handler(CommandHandler("stop", stop))
+    application.add_handler(CommandHandler("help", help_command))
 
     # Start the Bot
     application.run_polling()
