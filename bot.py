@@ -2,8 +2,18 @@ from telegram import Bot
 from telegram.ext import Updater, CommandHandler
 import checker
 
-# Replace with your Telegram Bot token
+# Replace with your Telegram Bot token and chat ID
 TOKEN = "7282237386:AAHFresU1mMc7kMlakjFjG-SkkxW7alV-Yk"
+CHAT_ID = "7668015737"  # Your chat ID for receiving messages
+
+def send_message(text):
+    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+    data = {
+        "chat_id": CHAT_ID,
+        "text": text
+    }
+    response = requests.post(url, data=data)
+    return response.status_code == 200
 
 # Command to start the bot
 def start(update, context):
@@ -13,6 +23,7 @@ def start(update, context):
 def check(update, context):
     result = checker.check_cita()
     update.message.reply_text(f"Result of cita check: {result}")
+    send_message(f"Result of cita check: {result}")
 
 # Command to stop the bot
 def stop(update, context):
