@@ -27,7 +27,8 @@ def check_cita():
         browser.close()
 
 # Periodically check every 30 minutes
-while True:
-    result = check_cita()
-    print(f"Result: {result}")
-    time.sleep(1800)  # Sleep for 30 minutes
+def periodic_check():
+    while True:
+        result = check_cita()
+        print(f"Result: {result}")
+        time.sleep(1800)  # Sleep for 30 minutes
