@@ -6,8 +6,9 @@ import requests  # For sending Telegram messages
 from playwright.sync_api import sync_playwright  # Import Playwright for browser automation
 
 # Replace with your Telegram Bot token and chat ID
-TOKEN = "YOUR_BOT_TOKEN"
-CHAT_ID = "YOUR_CHAT_ID"  # Your chat ID for receiving messages
+TOKEN = "7282237386:AAHFresU1mMc7kMlakjFjG-SkkxW7alV-Yk
+"
+CHAT_ID = "7668015737"  # Your chat ID for receiving messages
 
 def send_message(text):
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
