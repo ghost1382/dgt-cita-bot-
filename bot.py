@@ -3,7 +3,7 @@ from telegram.ext import Updater, CommandHandler
 import checker
 
 # Replace with your Telegram Bot token
-TOKEN = "YOUR_BOT_TOKEN"
+TOKEN = "7282237386:AAHFresU1mMc7kMlakjFjG-SkkxW7alV-Yk"
 
 # Command to start the bot
 def start(update, context):
