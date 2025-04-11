@@ -2,3 +2,4 @@ requests
 playwright
 python-telegram-bot
 beautifulsoup4
+--upgrade pip
