@@ -1,5 +1,5 @@
-from telegram import Bot
-from telegram.ext import Updater, CommandHandler
+from telegram import Update
+from telegram.ext import Application, CommandHandler, CallbackContext
 import checker
 import threading
 import requests  # For sending Telegram messages
@@ -18,18 +18,18 @@ def send_message(text):
     return response.status_code == 200
 
 # Command to start the bot
-def start(update, context):
-    update.message.reply_text("Bot started! Checking for citas...")
+async def start(update: Update, context: CallbackContext) -> None:
+    await update.message.reply_text("Bot started! Checking for citas...")
 
 # Command to manually trigger a cita check
-def check(update, context):
+async def check(update: Update, context: CallbackContext) -> None:
     result = checker.check_cita()
-    update.message.reply_text(f"Result of cita check: {result}")
+    await update.message.reply_text(f"Result of cita check: {result}")
     send_message(f"Result of cita check: {result}")
 
 # Command to stop the bot
-def stop(update, context):
-    update.message.reply_text("Bot stopped.")
+async def stop(update: Update, context: CallbackContext) -> None:
+    await update.message.reply_text("Bot stopped.")
     exit()
 
 # Function to start periodic checks
@@ -42,20 +42,16 @@ def main():
     # Start the periodic check in a separate thread
     start_periodic_check()
 
-    # Create the Updater and pass it your bot's token.
-    updater = Updater(TOKEN, use_context=True)
-    
-    # Get the dispatcher to register handlers
-    dispatcher = updater.dispatcher
-    
+    # Create the Application and pass it your bot's token.
+    application = Application.builder().token(TOKEN).build()
+
     # Add command handlers
-    dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("check", check))
-    dispatcher.add_handler(CommandHandler("stop", stop))
-    
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("check", check))
+    application.add_handler(CommandHandler("stop", stop))
+
     # Start the Bot
-    updater.start_polling()
-    updater.idle()
+    application.run_polling()
 
 if __name__ == '__main__':
     main()
